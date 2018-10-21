@@ -2,7 +2,11 @@ package com.alex.zuulexample.uiserver.services.impl;
 
 import com.alex.zuulexample.uiserver.dto.UserDto;
 import com.alex.zuulexample.uiserver.services.UserService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.amqp.core.DirectExchange;
+import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -13,11 +17,22 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private RestTemplate restTemplate;
+    private RabbitTemplate rabbitTemplate;
+
+    @Autowired
+    private DirectExchange directExchange;
+
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @Override
     public void register(UserDto userDto) {
-        restTemplate.postForEntity("/api/users/users", userDto, userDto.getClass());
+        try {
+            String userJson = objectMapper.writeValueAsString(userDto);
+            rabbitTemplate.convertAndSend(directExchange.getName(), "signup-queue", userJson);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

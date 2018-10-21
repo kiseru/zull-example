@@ -16,8 +16,8 @@ public class RabbitConfig {
     }
 
     @Bean
-    public Queue emailQueue() {
-        return new Queue("email-queue");
+    public Queue signupQueue() {
+        return new Queue("signup-queue");
     }
 
     @Bean
@@ -27,7 +27,7 @@ public class RabbitConfig {
 
     @Bean
     public Binding emailQueueBinding() {
-        return BindingBuilder.bind(emailQueue())
+        return BindingBuilder.bind(signupQueue())
                 .to(directExchange())
                 .with("email");
     }
