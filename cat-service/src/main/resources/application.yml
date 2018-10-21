@@ -2,7 +2,13 @@ spring:
   application:
     name: CatService
 
+
 eureka:
   client:
     service-url:
       defaultZone: http://registry:8761/eureka
+  instance:
+    prefer-ip-address: true
+server:
+  port: 8082
+
