@@ -4,3 +4,10 @@ zuul:
     user:
       path: /users/**
       serviceId: USERSERVICE
+
+server:
+  port: 8081
+
+spring:
+  application:
+    name: ZuulGateway
