@@ -1,4 +1,4 @@
-FROM maven:3.5.4-jdk8
+FROM maven:3.5.4-jdk-8
 
 ENV APP_DIR=/usr/src/app
 
