@@ -60,6 +60,7 @@
   </dependencies>
 
   <build>
+    <finalName>zuulGateway</finalName>
     <plugins>
       <plugin>
         <groupId>org.springframework.boot</groupId>
