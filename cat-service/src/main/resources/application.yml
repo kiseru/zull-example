@@ -2,7 +2,6 @@ spring:
   application:
     name: CatService
 
-
 eureka:
   client:
     service-url:

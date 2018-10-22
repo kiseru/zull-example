@@ -1,13 +1,6 @@
-zuul:
-  prefix: /api
-  routes:
-    user:
-      path: /users/**
-      serviceId: USERSERVICE
-
 spring:
   application:
-    name: ZuulGateway
+    name: UserService
 
 eureka:
   client:
